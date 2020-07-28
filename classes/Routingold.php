@@ -10,52 +10,46 @@ class Routing {
 		$routingArray = array("shop" => ["catalog", "subcatalog", "itemdetail"], "blog" => ["section", "article"]);
 		
 		$route = explode("/", $uri);
+		$routes = $route;
 		$firstLevelUri = $route[$i];
 		$secondLevelUri = $route[++$i];
 		$thirdLevelUri = $route[++$i];
 		$forthLevelUri = $route[++$i];
 		$controllerName = "IndexController";
 		$actionName = "index";
-		if($firstLevelUri != '') {
+		/*if($firstLevelUri != '') {
 			if(in_array($firstLevelUri, $basePagesArray)) {
-				/*
-				* one uri base pages from config: each name - method in IndexController 
-				* for example "contacts", "about", "termsAndConditions"
-				* */
+				/*первый уровень базовые страницы: каждое название - метод в IndexController */
 				$actionName = $firstLevelUri;
 			}else{
-				/*
-				* one uri: a controller name, when a method index is called automatically
-				* for example "shop", "blog", etc
-				 * */
+				/*первый уровень: название контроллера, а метод автоматически ставится - индекс*/
 				$controllerName = ucfirst($firstLevelUri. "Controller");
 				if($secondLevelUri != '') {
-					/*
-					 * two uri: the first part of the uri: is a controller name, the second one - a method is set in the config*
-					 * for example "shop/TVsets", "blog/aboutTVsets", etc
-					 * */
+					/*второй уровень: первая часть - контроллер, вторая - обусловленный в конфиге метод*/
 					$actionName = $routingArray[$firstLevelUri][0];
 					$arg[$routingArray[$firstLevelUri][0]] = $secondLevelUri;
 					if($thirdLevelUri != '') {
-						/*
-						 * third uri: the first part of the uri: is a controller name, the second one - a method is set in the config, the third - if a shop is subcatalog, if a blog is an article name
-						 * for example "shop/TVsets/plasma", "blog/aboutTVsets/how_to_define_tvset_quality", etc
-						 * */
+						/*третий уровень: первая часть - контроллер, вторая - обусловленный в конфиге метод, третий - параметр*/
 						$actionName = $routingArray[$firstLevelUri][1];
 						$arg[$routingArray[$firstLevelUri][1]] = $thirdLevelUri;
 						if($forthLevelUri != '') {
-							/*
-							 * forth uri: the first part of the uri: is a controller name, the second one - a method is set in the config, the fourth - a item slug
-							 * for example "shop/TVsets/plasma/samsungA310"
-							 * */
+							/*четвертый уровень: первая часть - контроллер, вторая - обусловленный в конфиге метод, четвертый - slug товара*/
 							$actionName = $routingArray[$firstLevelUri][2];
 							$arg[$routingArray[$firstLevelUri][2]] = $forthLevelUri;
 						}
 					}
 				}
 			}
-		}
-				
+		}*/
+		$start = 2;
+		for($i=2; $i<count($routes); $i++){
+			if(in_array($routes[$start], $basePagesArray)){
+				echo "eeeeeee<br>";
+				/*первый уровень базовые страницы: каждое название - метод в IndexController */
+				$actionName = $firstLevelUri;
+			}
+			 echo "routes:: ".$routes[$i]."<br>";
+		}	
 			
 		
 		echo "<pre>";
