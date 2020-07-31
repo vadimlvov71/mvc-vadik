@@ -2,9 +2,21 @@
 
 class View {
 
-
-	public function render($tpl, $pageData) {
-		include ROOT. $tpl;
+	public $controllerName;
+	public $pageName;
+	public $data;
+	//////
+	public function render($view, $data) {
+		$this->controllerName = $data["controllerName"];
+		$this->pageName = $view;
+		$this->data = $data;
+		include_once '../layout/main.php';
+		
 	}
-
+	public function content() {
+		$controllerName = $this->controllerName;
+		$pageName = $this->pageName;
+		$data = $this->data;
+		include_once '../views/'.$controllerName.'/'.$pageName.'.php';
+	}
 }

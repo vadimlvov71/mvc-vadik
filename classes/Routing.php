@@ -3,12 +3,18 @@ spl_autoload_register(function ($class_name) {
     include '../controllers/'.$class_name . '.php';
 });
 class Routing {
+	/*
+	 * todo 
+	 * transfer into the config file
+	 * */
+	private static $basePagesArray = array("contacts", "about", "termsAndConditions");
+	private	static $routingArray = array("shop" => ["catalog", "subcatalog", "itemdetail"], "blog" => ["section", "article"]);
+		
 	public static function setRoute($uri) {
 		$i = 2;
 		$arg = array();
-		$basePagesArray = array("contacts", "about", "termsAndConditions");
-		$routingArray = array("shop" => ["catalog", "subcatalog", "itemdetail"], "blog" => ["section", "article"]);
-		
+		$basePagesArray = self::$basePagesArray;
+		$routingArray = self::$routingArray;
 		$route = explode("/", $uri);
 		$firstLevelUri = $route[$i];
 		$secondLevelUri = $route[++$i];
@@ -54,15 +60,17 @@ class Routing {
 					}
 				}
 			}
+		}			
+		if (class_exists($controllerName)) {
+			$controller = new $controllerName();
+			$controller->$actionName($arg);
+		}else{
+			self::ErrorPage404();
 		}
-				
-			
-		
-		echo "<pre>";
-			print_r($route);
-			echo "</pre>";
-		$controller = new $controllerName();
-		$controller->$actionName($arg);
-			
 	}
+	public static function ErrorPage404()
+	{
+        $controller = new IndexController();
+        $controller->error404();
+    }
 }
