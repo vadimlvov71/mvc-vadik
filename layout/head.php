@@ -4,7 +4,7 @@
     
     <meta name="description" content="Пример на bootstrap 4: Карусель, навигационная панель и новые компоненты.">
 
-    <title><?php echo ($pages[$uri]->title)?></title>
+    <title><?=$data['title']?></title>
 
     <!-- Bootstrap core CSS -->
 <link href="<?php echo  ($path) ?>/web/css/bootstrap.min.css" rel="stylesheet"  >

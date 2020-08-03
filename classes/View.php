@@ -13,7 +13,8 @@ class View {
 		include_once '../layout/main.php';
 		
 	}
-	public function content() {
+	public function content($path) {
+		echo $path."<br>";
 		$controllerName = $this->controllerName;
 		$pageName = $this->pageName;
 		$data = $this->data;

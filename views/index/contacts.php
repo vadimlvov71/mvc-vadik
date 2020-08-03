@@ -1,5 +1,6 @@
 <?php
- echo "<pre>";
-		print_r($data);
-		echo "</pre>";
-		?>
+foreach($data["row"] as $item){
+	echo "contact item:".$item."<br>";
+}
+
+?>

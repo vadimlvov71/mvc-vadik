@@ -1,35 +1,26 @@
 <?php
 
 class BlogController extends BaseController {
-
-
-
-/*
+	public $blogList;
 	public function __construct() {
-		////
-	}
-*/
-
+		parent::__construct(); 
+		$this->blogList = $this->model->getBlogRows();
+	}	
 	public function index() {
-		//$this->pageData['title'] = "Вход в личный кабинет";
-		//$this->view->render('index', $content);
-		echo "index";
+		$this->pageData['title'] = "The first page of Blog";
+		$this->pageData['rows'] = $this->blogList;
+		$this->view->render("index", $this->pageData);
 	}
-	public function section($arg) {
-		//$this->pageData['title'] = "Вход в личный кабинет";
-		//$this->view->render('index', $content);
-		echo "arg:<pre>";
-		print_r($arg);
+
+	public function article($slug) {
+		echo "<pre>";
+		print_r($slug);
 		echo "</pre>";
-		echo "blog:::section";
+		$this->pageData['content'] = $this->model->getDetail($slug["article"]);
+		$this->pageData['title'] = $this->pageData['content']['title'];
+		$this->pageData['secondmenu'] = $this->blogList;
+		$this->pageData['suburi'] = "blog/";
+		$this->view->render('article', $this->pageData);
 	}
 	
-	public function article($arg) {
-		//$this->pageData['title'] = "Вход в личный кабинет";
-		//$this->view->render('index', $content);
-		echo "arg:<pre>";
-		print_r($arg);
-		echo "</pre>";
-		echo "blog:::article";
-	}
 }

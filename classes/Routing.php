@@ -8,7 +8,7 @@ class Routing {
 	 * transfer into the config file
 	 * */
 	private static $basePagesArray = array("contacts", "about", "termsAndConditions");
-	private	static $routingArray = array("shop" => ["catalog", "subcatalog", "itemdetail"], "blog" => ["section", "article"]);
+	private	static $routingArray = array("shop" => ["catalog", "subcatalog", "itemdetail"], "blog" => ["article"]);
 		
 	public static function setRoute($uri) {
 		$i = 2;
@@ -36,19 +36,25 @@ class Routing {
 				 * */
 				$controllerName = ucfirst($firstLevelUri. "Controller");
 				if($secondLevelUri != '') {
+					
 					/*
 					 * two uri: the first part of the uri: is a controller name, the second one - a method is set in the config*
 					 * for example "shop/TVsets", "blog/aboutTVsets", etc
 					 * */
 					$actionName = $routingArray[$firstLevelUri][0];
 					$arg[$routingArray[$firstLevelUri][0]] = $secondLevelUri;
+					//echo "controllerName".$controllerName."<br>";
+					//echo "actionName".$actionName."<br>";
 					if($thirdLevelUri != '') {
+						//echo "3333333<br>";
+						
 						/*
 						 * third uri: the first part of the uri: is a controller name, the second one - a method is set in the config, the third - if a shop is subcatalog, if a blog is an article name
 						 * for example "shop/TVsets/plasma", "blog/aboutTVsets/how_to_define_tvset_quality", etc
 						 * */
 						$actionName = $routingArray[$firstLevelUri][1];
 						$arg[$routingArray[$firstLevelUri][1]] = $thirdLevelUri;
+						
 						if($forthLevelUri != '') {
 							/*
 							 * forth uri: the first part of the uri: is a controller name, the second one - a method is set in the config, the fourth - a item slug
