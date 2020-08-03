@@ -21,6 +21,7 @@ include 'head.php';
 					</div>
 					<div class="col-md-7">
 						<?php 
+						$this->breadcrums();
 						$this->content($path);
 						?>
 					</div>

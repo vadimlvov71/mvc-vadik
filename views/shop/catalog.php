@@ -2,7 +2,7 @@
 <h2>list of subcatalogs:</h2>
 <?php
 foreach($data["subcatalogs"] as $url => $item){
-	echo "<div><a href='".$path.$data["catalog_uri"]."/".$url."'>".$item."</a></div>";
+	echo "<div><a href='".$path.$data["path_uri"].$url."'>".$item."</a></div>";
 }
 ?>
 

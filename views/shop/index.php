@@ -1,7 +1,7 @@
 
 <?php
 foreach($data["catalogs"] as $url => $item){
-	echo "<div><a href='".$path."shop/".$url."'>".$item."</a></div>";
+	echo "<div><a href='".$path.$data["path_uri"].$url."'>".$item."</a></div>";
 }
 ?>
 

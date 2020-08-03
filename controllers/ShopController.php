@@ -8,18 +8,19 @@ class ShopController extends BaseController {
 		parent::__construct(); 
 		$this->catalogs = $this->model->getShopCatalogs();
 		$this->pageData['secondmenu'] = $this->catalogs;
-		$this->pageData['suburi'] = "shop/";
+		
 	}
 	public function index() {
 		$this->pageData['title'] = "The first page of Shop";
 		$this->pageData['catalogs'] = $this->model->getShopCatalogs();
+		$this->pageData['path_uri'] = "shop/";
 		$this->view->render("index", $this->pageData);
 	}
 	public function catalog($slug) {
 		$catalogName = $this->catalogs[$slug["catalog"]];
 		$this->pageData['subcatalogs'] = $this->model->getShopSubCatalogs($slug["catalog"]);
 		$this->pageData['title'] = $catalogName;
-		$this->pageData['catalog_uri'] = "shop/".$slug["catalog"];
+		$this->pageData['path_uri'] = "shop/".$slug["catalog"]."/";
 		$this->view->render('catalog', $this->pageData);
 	}
 	public function subcatalog($slug) {
@@ -33,11 +34,20 @@ class ShopController extends BaseController {
 		$this->view->render('subcatalog', $this->pageData);
 		echo "shop:::subcatalog";
 	}
-	public function itemdetail($arg) {
-		//$this->pageData['title'] = "Вход в личный кабинет";
-		//$this->view->render('index', $content);
+	public function itemdetail($slug) {
+		$catalogName = $this->catalogs[$slug["catalog"]];
+		$subcatalogs = $this->model->getShopSubCatalogs($slug["catalog"]);
+		$shopitems = $this->model->getShopItems($slug["subcatalog"]);
+		$subcatalogName = $subcatalogs[$slug["subcatalog"]];
+		$this->pageData['catalog_name'] = $catalogName;
+		$this->pageData['subcatalog_name'] = $subcatalogName;
+		$this->pageData['content'] = $shopitems[$slug["itemdetail"]];
+		$this->pageData['title'] = $this->pageData['content'];
+		$this->pageData['secondmenu'] = $shopitems;
+		$this->pageData['parts'] = $slug;
+		$this->view->render('itemdetail', $this->pageData);
 		echo "arg:<pre>";
-		print_r($arg);
+		print_r($slug);
 		echo "</pre>";
 		echo "shop:::itemdetail";
 	}
