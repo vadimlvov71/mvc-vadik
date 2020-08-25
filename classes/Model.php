@@ -1,10 +1,13 @@
 <?php
-
+spl_autoload_register(function ($class_name) {
+    include '../classes/'.$class_name . '.php';
+});
 class Model {
 
 	public function getMenu() {
 		$array = array();
 		$array["index"] = "Home";
+		//$array["search"] = "Domain Zone Search";
 		$array["contacts"] = "Contacts";
 		$array["about"] = "About";
 		$array["blog"] = "Blog";
