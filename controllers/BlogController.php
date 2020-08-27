@@ -15,7 +15,6 @@ class BlogController extends BaseController {
 		$this->pageData['title'] = "The first page of Blog";
 		//$this->pageData['path_uri'] = "/".$this->controllerName."/";
 		$this->view->render("index", $this->pageData);
-		
 	}
 
 	public function article($request) {

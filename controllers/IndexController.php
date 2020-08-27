@@ -2,14 +2,19 @@
 spl_autoload_register(function ($class_name) {
     include '../models/'.$class_name . '.php';
 });
+ 
 class IndexController extends BaseController {
-
 	
-	public function index() {
+	private $modelIndex;
+	
+	/*public function __construct($request) {
+		parent::__construct($request);
+		$this->modelIndex = new Index();
+	}*/
+	public function index($request) {
 		$this->pageData['title'] = "Home";
-		//$this->pageData['title'] = "Пaaaaaaaaaa";
-		
 		$this->pageData['row'] = $this->model->getRows(1, 10);
+		$this->pageData['text'] = Index::getText("index");
 		$this->view->render("index", $this->pageData);
 	}
 	public function search() {
@@ -22,12 +27,12 @@ class IndexController extends BaseController {
 	public function contacts($request) {
 		$this->pageData['title'] = "Contacts";
 		$this->pageData['request'] = $request;
-		$this->pageData['row'] = $this->model->getRows(10, 2);
+		$this->pageData['text'] = Index::getText("contacts");
 		$this->view->render('contacts', $this->pageData);
 	}
 	public function about() {
 		$this->pageData['title'] = "About";
-		$this->pageData['row'] = $this->model->getRows(1, 1);
+		$this->pageData['text'] = Index::getText("about");
 		$this->view->render('about', $this->pageData);
 	}
 }

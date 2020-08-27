@@ -23,9 +23,6 @@ class BaseController {
 		$this->pageData['controllerName'] = $this->controllerName;
 		$this->pageData['breadcrumbs'][''] = "Site Name";
 		$this->pageData['breadcrumbs'][$this->controllerName] = $this->catalog;
-		/*echo "aaaaaaa<pre>";
-		print_r($request);
-		echo "</pre>-----------------";*/
 	}
 	
 	public function error404(){

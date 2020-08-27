@@ -19,7 +19,6 @@ class Routing {
 		$basePagesArray = self::$basePagesArray;
 		$routingArray = self::$routingArray;
 		$route = explode("/", $uri);
-		//echo "SERVER_NAME:".$_SERVER['SERVER_NAME']."<br>";
 
 		if($_SERVER['SERVER_NAME'] == "localhost"){
 			$limit = 2;
@@ -28,9 +27,7 @@ class Routing {
 		}
 		array_splice($route, 0, $limit);
 		$numRouteParts = count($route);
-		//echo "numRouteParts:".$numRouteParts."<br>";
 		for ($y = 0; $y <= $numRouteParts; $y++) {
-			//echo "route:".$route[$y]."<br>";
 			if($numRouteParts == 1){
 				if(in_array($route[$y], $basePagesArray)) {
 					/*
@@ -47,15 +44,13 @@ class Routing {
 				if($numRouteParts > 2){
 					$index = $numRouteParts;
 					$index -= 2;
-					echo "index:".$index."<br>";
+					
 					$actionName = $routingArray[$route[0]][$index];
 					foreach($routingArray as $key => $items){
 						if($key == $route[0]){
 							for ($i = 0; $i <= count($items); $i++) {
 								if($numRouteParts > $i){
 									$x = $i;
-									echo "item".$items[$i]."<br>";
-									$value = "bbbbb";
 									$request->attributes->setAttribute($items[$i], $route[++$x]);
 								}
 							}
@@ -70,9 +65,6 @@ class Routing {
 				break;
 			}
 		}
-		
-		
-	
 		if (class_exists($controllerName)) {
 			$controller = new $controllerName($request);
 			$controller->$actionName($request);
