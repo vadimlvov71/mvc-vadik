@@ -36,7 +36,13 @@ class Routing {
 				* //*/
 					$actionName = $route[$y];
 				}else{
-					$controllerName = ucfirst($route[$y]. "Controller");
+					echo "route:: ".$route[$y]."<br>";
+					if(empty($route[$y])){
+						$name = "index";
+					}else{
+						$name = $route[$y];
+					}
+					$controllerName = ucfirst($name. "Controller");
 				}
 				$request->attributes->setAttribute($actionName, $actionName);
 				break;
@@ -65,6 +71,7 @@ class Routing {
 				break;
 			}
 		}
+		echo "controllerName".$controllerName."actionName".$actionName."";
 		if (class_exists($controllerName)) {
 			$controller = new $controllerName($request);
 			$controller->$actionName($request);
