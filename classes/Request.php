@@ -1,6 +1,9 @@
 <?php
 spl_autoload_register(function ($class_name) {
-    include '../classes/'.$class_name . '.php';
+	$path = '../classes/'.$class_name . '.php';
+	if (file_exists($path)) {
+		include_once $path;
+	}
 });
 class Request {
 	

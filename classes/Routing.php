@@ -1,6 +1,10 @@
 <?php
+
 spl_autoload_register(function ($class_name) {
-    include '../controllers/'.$class_name . '.php';
+	$path = '../controllers/'.$class_name . '.php';
+	if (file_exists($path)) {
+		include_once $path;
+	}
 });
 class Routing {
 	/*
@@ -36,7 +40,7 @@ class Routing {
 				* //*/
 					$actionName = $route[$y];
 				}else{
-					echo "route:: ".$route[$y]."<br>";
+					//echo "route:: ".$route[$y]."<br>";
 					if(empty($route[$y])){
 						$name = "index";
 					}else{
@@ -71,7 +75,7 @@ class Routing {
 				break;
 			}
 		}
-		echo "controllerName".$controllerName."actionName".$actionName."";
+		//echo "controllerName".$controllerName."actionName".$actionName."";
 		if (class_exists($controllerName)) {
 			$controller = new $controllerName($request);
 			$controller->$actionName($request);
